@@ -1,5 +1,3 @@
-
-
 import { useEffect, useState } from "react";
 import {
   createCategoryApi,
@@ -12,7 +10,7 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Category = () => {
+const TechCategory = () => {
   const [categories, setCategories] = useState([]);
   const [name, setName] = useState("");
   const [editId, setEditId] = useState(null);
@@ -247,4 +245,4 @@ const Category = () => {
   );
 };
 
-export default Category;
+export default TechCategory;

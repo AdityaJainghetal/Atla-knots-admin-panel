@@ -1,157 +1,23 @@
-// // src/pages/Login.jsx
-// import { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
-// import { LogIn, Mail, Lock, AlertCircle } from 'lucide-react';
 
-// const Login = () => {
-//   const [formData, setFormData] = useState({
-//     email: '',
-//     password: '',
-//   });
-//   const [error, setError] = useState('');
-//   const [loading, setLoading] = useState(false);
 
-//   const navigate = useNavigate();
-
-//   const handleChange = (e) => {
-//     setFormData({
-//       ...formData,
-//       [e.target.name]: e.target.value,
-//     });
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setError('');
-//     setLoading(true);
-
-//     try {
-//       const response = await fetch('https://atla-knots-solution-admin.onrender.com/api/auth/login', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(formData),
-//       });
-
-//       const data = await response.json();
-
-//       if (!response.ok) {
-//         throw new Error(data.message || 'Login failed');
-//       }
-
-//       // Assuming your backend sends token in response
-//       // Save token (you can use localStorage, context, redux, etc.)
-//       localStorage.setItem('token', data.token);
-
-//       // Redirect to dashboard or home
-//       navigate('/dashboard');
-
-//     } catch (err) {
-//       setError(err.message);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   return (
-//     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-//       <div className="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden">
-//         {/* Header */}
-//         <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-8 text-center">
-//           <div className="w-16 h-16 mx-auto bg-white rounded-full flex items-center justify-center mb-4">
-//             <LogIn className="w-8 h-8 text-blue-600" />
-//           </div>
-//           <h2 className="text-3xl font-bold text-white">Welcome Back</h2>
-//           <p className="text-blue-100 mt-2">Sign in to continue</p>
-//         </div>
-
-//         {/* Form */}
-//         <div className="p-8">
-//           {error && (
-//             <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center gap-3 text-red-700">
-//               <AlertCircle size={20} />
-//               <span>{error}</span>
-//             </div>
-//           )}
-
-//           <form onSubmit={handleSubmit} className="space-y-6">
-//             {/* Email */}
-//             <div>
-//               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-//                 Email
-//               </label>
-//               <div className="relative">
-//                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-//                 <input
-//                   id="email"
-//                   name="email"
-//                   type="email"
-//                   required
-//                   value={formData.email}
-//                   onChange={handleChange}
-//                   className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
-//                   placeholder="you@example.com"
-//                 />
-//               </div>
-//             </div>
-
-//             {/* Password */}
-//             <div>
-//               <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-//                 Password
-//               </label>
-//               <div className="relative">
-//                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-//                 <input
-//                   id="password"
-//                   name="password"
-//                   type="password"
-//                   required
-//                   value={formData.password}
-//                   onChange={handleChange}
-//                   className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
-//                   placeholder="••••••••"
-//                 />
-//               </div>
-//             </div>
-
-//             {/* Submit Button */}
-//             <button
-//               type="submit"
-//               disabled={loading}
-//               className={`w-full py-3 px-4 bg-blue-600 text-white font-medium rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ${
-//                 loading ? 'opacity-70 cursor-not-allowed' : ''
-//               }`}
-//             >
-//               {loading ? 'Signing in...' : 'Sign In'}
-//             </button>
-//           </form>
-
-//           {/* Footer links */}
-
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Login;
-
-// src/pages/Login.jsx
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { LogIn, Mail, Lock, AlertCircle } from "lucide-react";
-import { toast } from "react-toastify";
+// src/components/Login.jsx  or  src/pages/Login.jsx
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { LogIn, Mail, Lock } from 'lucide-react';
+import { toast } from 'react-toastify';
+import { loginUser } from '../../Pages/auth/authSlice.js'; // adjust path
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
-  const [loading, setLoading] = useState(false);
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { isLoading, error } = useSelector((state) => state.auth);
 
   const handleChange = (e) => {
     setFormData({
@@ -162,53 +28,32 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
 
-    const toastId = toast.loading("Logging in...");
+    const toastId = toast.loading('Logging in...');
 
-    try {
-      const response = await fetch(
-        "https://atla-knots-solution-admin.onrender.com/api/auth/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        },
-      );
+    const resultAction = await dispatch(loginUser(formData));
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "Login failed");
-      }
-
-      // Save token
-      localStorage.setItem("token", data.token);
-
-      // Success notification
+    if (loginUser.fulfilled.match(resultAction)) {
+      // Success
       toast.update(toastId, {
-        render: "Login successful! Redirecting...",
-        type: "success",
+        render: 'Login successful! Redirecting...',
+        type: 'success',
         isLoading: false,
-        autoClose: 2000,
+        autoClose: 1800,
       });
 
-      // Small delay for user to see success message
       setTimeout(() => {
-        navigate("/dashboard", { replace: true });
-      }, 800);
-    } catch (err) {
-      // Error notification
+        navigate('/dashboard', { replace: true });
+      }, 900);
+    } else {
+      // Failed
+      const errorMsg = resultAction.payload || 'Something went wrong';
       toast.update(toastId, {
-        render: err.message || "Something went wrong!",
-        type: "error",
+        render: errorMsg,
+        type: 'error',
         isLoading: false,
         autoClose: 5000,
       });
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -249,7 +94,7 @@ const Login = () => {
                   onChange={handleChange}
                   className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
                   placeholder="you@example.com"
-                  disabled={loading}
+                  disabled={isLoading}
                 />
               </div>
             </div>
@@ -276,7 +121,7 @@ const Login = () => {
                   onChange={handleChange}
                   className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
                   placeholder="••••••••"
-                  disabled={loading}
+                  disabled={isLoading}
                 />
               </div>
             </div>
@@ -284,26 +129,31 @@ const Login = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              disabled={loading}
+              disabled={isLoading}
               className={`w-full py-3 px-4 bg-blue-600 text-white font-medium rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition flex items-center justify-center gap-2 ${
-                loading ? "opacity-70 cursor-not-allowed" : ""
+                isLoading ? 'opacity-70 cursor-not-allowed' : ''
               }`}
             >
-              {loading ? (
+              {isLoading ? (
                 <>
                   <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
                   <span>Signing in...</span>
                 </>
               ) : (
-                "Sign In"
+                'Sign In'
               )}
             </button>
           </form>
 
-          {/* Footer links */}
+          {/* Show redux error if you want (optional) */}
+          {error && (
+            <p className="mt-4 text-center text-red-600 text-sm">{error}</p>
+          )}
+
+          {/* Footer */}
           <div className="mt-6 text-center text-sm text-gray-600">
             <p>
-              Don't have an account?{" "}
+              Don't have an account?{' '}
               <a
                 href="/register"
                 className="text-blue-600 hover:underline font-medium"

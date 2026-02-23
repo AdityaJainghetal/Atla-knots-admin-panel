@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://atla-knots-solution-admin.onrender.com/api/product";
+const API_URL = "https://atla-knots-admin.onrender.com/api/product";
 
 export const createProductApi = (formData) => {
   return axios.post(API_URL, formData, {
@@ -10,7 +10,7 @@ export const createProductApi = (formData) => {
 
 export const updateHomeApi = (id, data) => {
   return axios.put(
-    `https://atla-knots-solution-admin.onrender.com/api/updatehome/${id}`,
+    `https://atla-knots-admin.onrender.com/api/updatehome/${id}`,
     data,
   );
 };

@@ -1,5 +1,6 @@
 // src/components/ContactList.jsx
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import DataTable from "react-data-table-component";
 
 const columns = [
@@ -119,25 +120,11 @@ const Contact = () => {
       setLoading(true);
       setError(null);
 
-      const response = await fetch(
-        "https://atla-knots-solution-admin.onrender.com/api/contact",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            // Add authorization if your API is protected
-            // "Authorization": `Bearer ${token}`,
-          },
-        },
+      const response = await axios.get(
+        "https://atla-knots-admin.onrender.com/api/contact",
       );
 
-      if (!response.ok) {
-        throw new Error(
-          `Server error: ${response.status} ${response.statusText}`,
-        );
-      }
-
-      const result = await response.json();
+      const result = response.data;
       // Assuming the response is { data: [...] } or just [...]
       const contacts = Array.isArray(result) ? result : result.data || [];
       setData(contacts);
@@ -159,20 +146,9 @@ const Contact = () => {
     }
 
     try {
-      const response = await fetch(
-        `https://atla-knots-solution-admin.onrender.com/api/contact/${id}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            // "Authorization": `Bearer ${token}`,
-          },
-        },
+      await axios.delete(
+        `https://atla-knots-admin.onrender.com/api/contact/${id}`,
       );
-
-      if (!response.ok) {
-        throw new Error("Failed to delete contact");
-      }
 
       // Remove from UI
       setData((prev) => prev.filter((item) => item._id !== id));
