@@ -40,6 +40,7 @@ function App() {
             <Route path="/blogcategory" element={<CategoryBlog/>}/>
             <Route path="/queries" element={<QueriesTable />} />
             <Route path="/gallery" element={<Gallery/>}/>
+    
           
           </Route>
         </Route>
