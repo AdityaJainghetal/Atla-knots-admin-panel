@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = "https://atla-knots-admin-1.onrender.com/api/contact";
+const API = "https://atla-knots-admin-2.onrender.com/api/contact";
 
 // GET All Contacts
 export const getContactsApi = () => {

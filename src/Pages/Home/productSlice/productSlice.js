@@ -5,7 +5,7 @@
 //   'product/fetchCategories',
 //   async (_, { rejectWithValue }) => {
 //     try {
-//       const response = await fetch("https://atla-knots-admin-1.onrender.com/api/blogcategory");
+//       const response = await fetch("https://atla-knots-admin-2.onrender.com/api/blogcategory");
 //       if (!response.ok) throw new Error("Failed to load categories");
 
 //       const result = await response.json();
@@ -121,7 +121,7 @@ export const fetchCategories = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const res = await fetch(
-        "https://atla-knots-admin-1.onrender.com/api/blogcategory",
+        "https://atla-knots-admin-2.onrender.com/api/blogcategory",
       );
       if (!res.ok) throw new Error("Failed to load categories");
       const data = await res.json();

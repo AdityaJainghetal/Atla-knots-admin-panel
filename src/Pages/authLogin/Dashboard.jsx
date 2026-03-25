@@ -58,22 +58,22 @@ const Dashboard = () => {
           techCategoriesRes,
         ] = await Promise.all([
           axios
-            .get("https://atla-knots-admin-1.onrender.com/api/users")
+            .get("https://atla-knots-admin-2.onrender.com/api/users")
             .catch(() => ({ data: null })),
           axios
-            .get("https://atla-knots-admin-1.onrender.com/query")
+            .get("https://atla-knots-admin-2.onrender.com/query")
             .catch(() => ({ data: null })),
           axios
-            .get("https://atla-knots-admin-1.onrender.com/api/contact")
+            .get("https://atla-knots-admin-2.onrender.com/api/contact")
             .catch(() => ({ data: null })),
           axios
             .get(
-              "https://atla-knots-admin-1.onrender.com/api/technology/product",
+              "https://atla-knots-admin-2.onrender.com/api/technology/product",
             )
             .catch(() => ({ data: null })),
           axios
             .get(
-              "https://atla-knots-admin-1.onrender.com/api/technology/category",
+              "https://atla-knots-admin-2.onrender.com/api/technology/category",
             )
             .catch(() => ({ data: null })),
         ]);

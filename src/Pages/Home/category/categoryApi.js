@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://atla-knots-admin-1.onrender.com/api/blogcategory",
+  baseURL: "https://atla-knots-admin-2.onrender.com/api/blogcategory",
 });
 
 // CREATE
