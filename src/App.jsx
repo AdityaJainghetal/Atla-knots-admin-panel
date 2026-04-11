@@ -19,6 +19,9 @@ import Technology from './Pages/technology/technology';
 import QueriesTable from './Pages/query/QueriesTable';
 import CategoryBlog from './Pages/Home/category/category';
 import Gallery from './Pages/gallery/Gallery';
+// import Poftfolio from './Pages/Portfolio/Poftfolio';
+import Portfolio from './Pages/Portfolio/Portfolio';
+import PortfolioCategory from './Pages/Portfolio/categoryPortfolio/PortfolioCategory';
 function App() {
   return (
     <BrowserRouter>
@@ -40,6 +43,11 @@ function App() {
             <Route path="/blogcategory" element={<CategoryBlog/>}/>
             <Route path="/queries" element={<QueriesTable />} />
             <Route path="/gallery" element={<Gallery/>}/>
+            <Route path="/portfoliocategory" element={<PortfolioCategory/>}/>
+            <Route path="/portfolio" element={<Portfolio/>}/>
+
+            
+
     
           
           </Route>

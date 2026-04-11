@@ -1,5 +1,3 @@
-
-
 import { NavLink, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
@@ -20,18 +18,16 @@ import clsx from "clsx";
 const navItems = [
   { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
 
-
-
-    {
+  {
     label: "Blogview",
     icon: BarChart3,
     children: [
       { path: "/homepage", label: "CreateBlog", icon: LayoutDashboard },
-      {path: "/blogcategory", label: "Blog Category", icon: BarChart3},
-  { path: "/getpost", label: "Show Blog", icon: LayoutDashboard },
+      { path: "/blogcategory", label: "Blog Category", icon: BarChart3 },
+      { path: "/getpost", label: "Show Blog", icon: LayoutDashboard },
     ],
   },
-  
+
   {
     label: "Technology",
     icon: BarChart3,
@@ -40,7 +36,7 @@ const navItems = [
       { path: "/technology", label: "All Technologies", icon: BarChart3 },
     ],
   },
-  
+
   {
     label: "TechNews",
     icon: BarChart3,
@@ -49,7 +45,20 @@ const navItems = [
       { path: "/category", label: "Category", icon: BarChart3 },
     ],
   },
-  
+
+  {
+    label: "Portfolio",
+    icon: BarChart3,
+    children: [
+      { path: "/portfolio", label: "portfolio", icon: TextSearch },
+      {
+        path: "portfoliocategory",
+        label: " portfolio Category",
+        icon: BarChart3,
+      },
+    ],
+  },
+
   { path: "/gallery", label: "Gallery", icon: GalleryHorizontal },
 
   { path: "/contact", label: "Contact", icon: Contact2 },
@@ -60,9 +69,9 @@ export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const [techOpen, setTechOpen] = useState(true);
   const [newsOpen, setNewsOpen] = useState(true);
-  
+
   const navigate = useNavigate();
-  
+
   const toggleSidebar = () => setIsOpen((p) => !p);
   const closeSidebar = () => setIsOpen(false);
 
@@ -101,7 +110,7 @@ export default function Sidebar() {
           "fixed inset-y-0 left-0 z-40 w-72 bg-gradient-to-b from-gray-950 to-gray-900 text-gray-100",
           "transform transition-transform duration-300 ease-in-out",
           "lg:translate-x-0 lg:relative lg:block",
-          isOpen ? "translate-x-0 shadow-2xl" : "-translate-x-full"
+          isOpen ? "translate-x-0 shadow-2xl" : "-translate-x-full",
         )}
       >
         <div className="flex flex-col h-full">
@@ -131,17 +140,27 @@ export default function Sidebar() {
                         onClick={toggle}
                         className={clsx(
                           "group flex w-full items-center justify-between gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all",
-                          "text-gray-300 hover:bg-gray-800/60 hover:text-gray-100"
+                          "text-gray-300 hover:bg-gray-800/60 hover:text-gray-100",
                         )}
                       >
                         <div className="flex items-center gap-3">
-                          <item.icon size={20} strokeWidth={2.1} className="shrink-0" />
+                          <item.icon
+                            size={20}
+                            strokeWidth={2.1}
+                            className="shrink-0"
+                          />
                           <span>{item.label}</span>
                         </div>
                         {isOpen ? (
-                          <ChevronDown size={18} className="transition-transform duration-200" />
+                          <ChevronDown
+                            size={18}
+                            className="transition-transform duration-200"
+                          />
                         ) : (
-                          <ChevronRight size={18} className="transition-transform duration-200" />
+                          <ChevronRight
+                            size={18}
+                            className="transition-transform duration-200"
+                          />
                         )}
                       </button>
 
@@ -157,11 +176,15 @@ export default function Sidebar() {
                                   "flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all",
                                   isActive
                                     ? "bg-gray-800/80 text-white"
-                                    : "text-gray-400 hover:bg-gray-800/50 hover:text-gray-200"
+                                    : "text-gray-400 hover:bg-gray-800/50 hover:text-gray-200",
                                 )
                               }
                             >
-                              <child.icon size={18} strokeWidth={2} className="shrink-0" />
+                              <child.icon
+                                size={18}
+                                strokeWidth={2}
+                                className="shrink-0"
+                              />
                               <span>{child.label}</span>
                             </NavLink>
                           ))}
@@ -182,11 +205,15 @@ export default function Sidebar() {
                         isActive
                           ? "bg-gray-800/80 text-white shadow-sm"
                           : "text-gray-400 hover:bg-gray-800/60 hover:text-gray-100",
-                        item.bottom ? "mt-6" : ""
+                        item.bottom ? "mt-6" : "",
                       )
                     }
                   >
-                    <item.icon size={20} strokeWidth={2.1} className="shrink-0" />
+                    <item.icon
+                      size={20}
+                      strokeWidth={2.1}
+                      className="shrink-0"
+                    />
                     <span>{item.label}</span>
                   </NavLink>
                 );
@@ -196,8 +223,8 @@ export default function Sidebar() {
 
           {/* Logout Section */}
           <div className="mt-auto border-t border-gray-800/60 p-4">
-            <div className="pt-2 border-t border-gray-700/50 mt-2" /> {/* optional visual separator */}
-
+            <div className="pt-2 border-t border-gray-700/50 mt-2" />{" "}
+            {/* optional visual separator */}
             <button
               type="button"
               onClick={handleLogout}

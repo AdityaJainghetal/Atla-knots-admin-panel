@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const API_BASE_URL = "https://atla-knots-admin-2.onrender.com/query"; // change if needed
+const API_BASE_URL = "http://localhost:8000/query"; // change if needed
 
 function QueriesTable() {
   const [queries, setQueries] = useState([]);
