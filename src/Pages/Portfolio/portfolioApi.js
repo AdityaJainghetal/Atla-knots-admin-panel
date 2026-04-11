@@ -2,7 +2,7 @@
 import axios from "axios";
 
 // Base URL (change this to your production URL later)
-const API_BASE_URL = "http://localhost:8000";
+const API_BASE_URL = "https://atla-knots-admin-1.onrender.com";
 
 // Optional: Create an axios instance with baseURL (recommended)
 const api = axios.create({
@@ -15,6 +15,7 @@ export const getCategoriesApi = () => api.get("/category/portfolio"); // Adjust 
 
 export const getTechApi = () => api.get("/portfolio");
 
-export const updateTechApi = (id, data) => api.put(`/portfolio/update/${id}`, data);
+export const updateTechApi = (id, data) =>
+  api.put(`/portfolio/update/${id}`, data);
 
 export const deleteTechApi = (id) => api.delete(`/portfolio/delete/${id}`);

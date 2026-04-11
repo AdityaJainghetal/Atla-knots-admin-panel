@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:8000/category/portfolio",
+  baseURL: "https://atla-knots-admin-1.onrender.com/category/portfolio",
 });
 
 // CREATE
